@@ -1,0 +1,20 @@
+name: Embedded C++17 & IIoT CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  verify:
+    name: Zero-Heap C++17 & Virtual PLC Verification
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile & Run Strict C++17 Verification Suite (-Wall -Wextra -Werror)
+        run: make test
+
+      - name: Run End-to-End Virtual PLC RS485 Simulation
+        run: make demo
